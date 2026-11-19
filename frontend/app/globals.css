@@ -180,59 +180,73 @@ a:hover { color: var(--green-400); }
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 2.5rem;
-  max-width: 1150px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem 2.5rem;
+  align-items: stretch;
+  min-height: 470px;
+  max-width: none;
+  margin: 0;
+  padding: 0;
   text-align: left;
   overflow: hidden;
 }
 
-.hero-content {
-  position: relative;
-  z-index: 1;
-}
-
-/* Station photo fills the right half of the hero. */
+/* Photo fills one full half of the hero, edge to edge. */
 .hero-media {
   position: relative;
-  height: 360px;
-  border-radius: 24px;
+  min-height: 100%;
   background: url('/hero.jpg') center 42% / cover no-repeat;
-  border: 1px solid var(--glass-border);
-  box-shadow: var(--shadow-3d);
-  transform: perspective(1200px) rotateY(-4deg);
-  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s;
-}
-.hero-media:hover {
-  transform: perspective(1200px) rotateY(0deg) scale(1.01);
-  box-shadow: var(--shadow-3d), var(--glow);
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  transform: none;
 }
 .hero-media::after {
   content: '';
   position: absolute;
   inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(90deg, rgba(3, 32, 21, 0.7) 0%, rgba(3, 32, 21, 0) 55%);
+  background: linear-gradient(
+    90deg,
+    rgba(3, 32, 21, 0.05) 0%,
+    rgba(3, 32, 21, 0) 55%,
+    rgba(10, 61, 46, 0.85) 90%,
+    #0a3d2e 100%
+  );
   pointer-events: none;
+}
+
+/* Other half: dark green + white gradient holding the welcome text. */
+.hero-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3.5rem clamp(1.5rem, 4vw, 4.5rem);
+  background:
+    radial-gradient(circle at 85% 12%, rgba(255, 255, 255, 0.18) 0%, transparent 55%),
+    linear-gradient(90deg, #0a3d2e 0%, #064e3b 55%, #032015 100%);
+}
+.hero-content h1 {
+  font-size: clamp(2rem, 3.4vw, 3rem);
 }
 
 @media (max-width: 860px) {
   .hero {
     grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .hero-media {
+    height: 260px;
+    min-height: 0;
+  }
+  .hero-media::after {
+    background: linear-gradient(180deg, rgba(3, 32, 21, 0.15) 0%, rgba(10, 61, 46, 0.9) 100%);
+  }
+  .hero-content {
     text-align: center;
-    gap: 2rem;
+    padding: 2.5rem 1.5rem;
   }
   .hero-sub {
     margin: 0 auto 2rem;
-  }
-  .hero-media {
-    height: 240px;
-    transform: none;
-  }
-  .hero-media::after {
-    background: linear-gradient(180deg, rgba(3, 32, 21, 0.55) 0%, rgba(3, 32, 21, 0) 60%);
   }
 }
 
