@@ -13,6 +13,9 @@ target/
 .env
 .env.local
 
+# Logs
+*.log
+
 # OS / editor
 Thumbs.db
 .DS_Store

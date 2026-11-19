@@ -1,0 +1,9 @@
+# Used when Netlify's "Base directory" is already set to frontend.
+# The frontend is a Next.js static export, so the build output is out/.
+
+[build]
+  command = "npm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "20"
